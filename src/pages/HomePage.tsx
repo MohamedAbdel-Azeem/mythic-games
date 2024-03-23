@@ -28,11 +28,11 @@ export default function HomePage() {
                 <div className="flex justify-evenly items-center p-2 text-slate-950 gap-4 bg-gray-50 bg-opacity-25 backdrop-blur-sm rounded-md shadow-sm shadow-slate-600">
                     <a href="https://github.com/MohamedAbdel-Azeem" target="_blank" className="px-2 py-1 bg-slate-100 rounded-full flex justify-center items-center gap-3 hover:bg-slate-200">
                         <img src={GithubLogo} alt="Github Logo" className="w-10 h-10 hover:animate-spin" />
-                        <span>MohamedAbdel-Azeem</span>
+                        <span className="md:block hidden">MohamedAbdel-Azeem</span>
                     </a>
                     <a href="https://www.linkedin.com/in/mohamed-abdelazeem-098086244/" target="_blank" className="px-2 py-1 bg-slate-100 rounded-full flex justify-center items-center gap-3 hover:bg-slate-200">
                         <img src={linkedinLogo} alt="linkedin logo" className="w-10 h-10 hover:animate-spin rounded-full" />
-                        <span>Mohamed Abdelazeem</span>
+                        <span className="md:block hidden">Mohamed Abdelazeem</span>
                     </a>
                 </div>
             </div>
