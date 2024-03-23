@@ -3,9 +3,6 @@ import Page1 from "./pages/page1";
 import HomePage from "./pages/HomePage";
 
 const Router = () => {
-
-  
-
   const router = createBrowserRouter([
     {
       path: "/",
