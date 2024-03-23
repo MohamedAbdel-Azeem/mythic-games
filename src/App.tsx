@@ -1,8 +1,12 @@
+import backgroundVideo from './assets/media/Elden-Ring-wallpaper.mp4';
+
 
 function App() {
   return (
-    <div className='w-dvw h-dvh flex justify-center items-start bg-primary'>
-      <h1 className='text-3xl font-bold underline text-center'>Main Page</h1>
+    <div className='fixed top-0 left-0 w-dvw h-dvh overflow-hidden z-[-1]'>
+      <video autoPlay loop muted>
+        <source src={backgroundVideo} type='video/mp4' />
+      </video>
     </div>
   )
 }
