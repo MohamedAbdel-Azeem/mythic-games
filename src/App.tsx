@@ -1,12 +1,17 @@
-import backgroundVideo from './assets/media/Elden-Ring-wallpaper.mp4';
+import Header from "./components/Header"
+import { Outlet } from "react-router-dom"
+
 
 
 function App() {
   return (
-    <div className='fixed top-0 left-0 w-dvw h-dvh overflow-hidden z-[-1]'>
-      <video autoPlay loop muted>
-        <source src={backgroundVideo} type='video/mp4' />
-      </video>
+    <div className="flex flex-col h-screen bg-primary">
+      <div className="relative top-0">
+        <Header />
+      </div>
+      <div className="flex-grow">
+        <Outlet />
+      </div>
     </div>
   )
 }
