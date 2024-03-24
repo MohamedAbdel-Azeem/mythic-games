@@ -1,11 +1,11 @@
 import { useState,useEffect } from "react";
 
 type GameProps = {
-    QueryType: "Normal" | "Trending" ;
+    QueryType: "Games" | "Trending" ;
 };
 
 export const useGamesList = (
-    { QueryType }: GameProps = { QueryType: "Normal" }
+    { QueryType }: GameProps = { QueryType: "Games" }
 ) => {
 
     const url = getUrl(QueryType);

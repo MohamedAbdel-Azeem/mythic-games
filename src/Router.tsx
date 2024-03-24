@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Page1 from "./pages/page1";
+import GamesList from "./pages/GamesList";
 import HomePage from "./pages/HomePage";
 
 const Router = () => {
@@ -9,8 +9,8 @@ const Router = () => {
       element: <HomePage />,
     },
     {
-      path: "/page1",
-      element: <Page1 />,
+      path: "/games/:queryType",
+      element: <GamesList />,
     }
   ]);
 
