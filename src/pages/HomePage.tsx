@@ -1,12 +1,14 @@
 import backgroundVideo from "../assets/media/Elden-Ring-wallpaper.mp4";
 import Header from "../components/Header";
+import { useGamesList } from "../hooks/useGamesList";
 import GithubLogo from "../assets/media/github-mark.png";
 import linkedinLogo from "../assets/media/linkedin-logo.png";
 import Icon from '@mdi/react';
-import { mdiDice5 } from '@mdi/js';
-import { mdiViewList } from '@mdi/js';
+import { mdiViewList,mdiFire,mdiDice5  } from '@mdi/js';
 
 export default function HomePage() {
+  const { trendingGamesList, trendingLoading, trendingError } = useGamesList({ QueryType: "Trending" });
+  const { normalGamesList, normalLoading, normalError } = useGamesList({ QueryType: "Normal" });
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <video
@@ -39,13 +41,17 @@ export default function HomePage() {
                 </div>
             </div>
             <div className="p-6 flex flex-col justify-center items-center  text-slate-950 gap-4 bg-gray-50 bg-opacity-25 backdrop-blur-sm rounded-md shadow-sm shadow-slate-600">
-                <div className="w-36 py-1 bg-slate-100 rounded-xl flex justify-center items-center gap-3 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
+                <div className="w-36 py-1 bg-slate-100 rounded-xl flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
                     <Icon path={mdiDice5} size={1} />
                     Roll a Dice
                 </div>
-                <div className="w-36 py-1 bg-slate-100 rounded-lg flex justify-center items-center gap-3 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
+                <div className="w-36 py-1 bg-slate-100 rounded-lg flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
                     <Icon path={mdiViewList} size={1} />
-                    View Games
+                    Games
+                </div>
+                <div className="w-36 py-1 bg-slate-100 rounded-lg flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
+                    <Icon path={mdiFire} size={1} />
+                    Trending
                 </div>
             </div>
         </div>

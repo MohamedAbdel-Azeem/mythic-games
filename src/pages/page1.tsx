@@ -1,5 +1,6 @@
 import Header from "../components/Header"
 
+
 export default function Page1() {
     return (
         <div className='w-dvw h-dvh flex flex-col justify-start items-center bg-primary'>
