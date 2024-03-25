@@ -2,16 +2,20 @@ import Header from "../components/Header";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useGamesList } from "../hooks/useGamesList";
 import { useParams } from "react-router-dom";
+import CustomPagination from "../components/CustomPagination";
+import { useEffect } from "react";
+
 
 export default function GamesList() {
-    const { queryType = 'Games' } = useParams<{ queryType: 'Games' | 'Trending' }>();
-    const { gamesList: games, loading: isLoading, error: isError } = useGamesList({ QueryType: queryType });
+    const { queryType = 'Games', pageNumber = '1' } = useParams<{ queryType: 'Games' | 'Trending'; pageNumber: string }>();
+    const { gamesList: games, loading: isLoading, error: isError } = useGamesList({ QueryType: queryType , pageNumber: parseInt(pageNumber) });
+
 
     if (isLoading) {
         return <LoadingSpinner />;
     }
     if (isError) {
-        return <div>Error: {isError}</div>;
+        return <div>Error: {isError.toString()}</div>;
     }
     return (
         <div className="w-full h-full flex flex-col justify-start items-center bg-primary overflow-x-hidden">
@@ -34,9 +38,9 @@ export default function GamesList() {
                             </div>
                         );
                     })}
+                    <CustomPagination />
                 </div>
             </main>
-            
         </div>
     );
 }

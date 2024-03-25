@@ -1,14 +1,15 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useMemo } from "react";
 
 type GameProps = {
     QueryType: "Games" | "Trending" ;
+    pageNumber: number;
 };
 
 export const useGamesList = (
-    { QueryType }: GameProps = { QueryType: "Games" }
+    { QueryType , pageNumber }: GameProps = { QueryType: "Games" , pageNumber: 1}
 ) => {
-
-    const url = getUrl(QueryType);
+  // const url = useMemo(() => getAPIUrl(QueryType, pageNumber), [QueryType, pageNumber]);
+    const url = getAPIUrl(QueryType, pageNumber);
 
     const [gamesList, setGamesList] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -25,14 +26,14 @@ export const useGamesList = (
       .then((response) => setGamesList(response.results))
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
-    },[]);
+    },[url]);
 
     return { gamesList, loading, error };
 }
 
-function getUrl(QueryType: GameProps["QueryType"]) : string{
+function getAPIUrl(QueryType: GameProps["QueryType"] , pageNumber : number) : string{
     if (QueryType === "Trending") {
         return "https://api.rawg.io/api/games?key=ca19ff26425d42c2b47b413aa4a2de2a&ordering=-added&dates=2022-01-01,2023-12-31";
     }
-    return "https://api.rawg.io/api/games?key=ca19ff26425d42c2b47b413aa4a2de2a";
+    return `https://api.rawg.io/api/games?key=ca19ff26425d42c2b47b413aa4a2de2a&page=${pageNumber}`;
 }

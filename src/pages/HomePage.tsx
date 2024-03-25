@@ -43,7 +43,7 @@ export default function HomePage() {
                     <Icon path={mdiDice5} size={1} />
                     Roll a Dice
                 </div>
-                <Link to="/games/Games">
+                <Link to="/games/Games/1">
                   <div className="w-36 py-1 bg-slate-100 rounded-lg flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
                       <Icon path={mdiViewList} size={1} />
                       Games

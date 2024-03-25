@@ -9,7 +9,7 @@ const Router = () => {
       element: <HomePage />,
     },
     {
-      path: "/games/:queryType",
+      path: "/games/:queryType/:pageNumber",
       element: <GamesList />,
     }
   ]);
