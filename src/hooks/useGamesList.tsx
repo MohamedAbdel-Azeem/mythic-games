@@ -18,12 +18,9 @@ export const useGamesList = (
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        
         if (gamesList[url]) {
-          console.log("Data already fetched");
             setLoading(false);
         } else {
-          console.log("Fetching data");
             setLoading(true);
             fetch(url, { mode: "cors" })
             .then((response) => {

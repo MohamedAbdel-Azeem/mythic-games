@@ -1,22 +1,23 @@
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
 export default function CustomPagination() {
+
+    const navigate = useNavigate();
+    const { pageNumber = '1' } = useParams();
+    console.log("Page number is ",pageNumber);
     return (
         <Pagination
             count={3}
             color="standard"
             variant="outlined"
             shape="rounded"
-            renderItem={(item) => (
-                <PaginationItem
-                    component={Link}
-                    to={`/games/Games/${item.page}`}
-                    {...item}
-                />
-            )}
+            page={parseInt(pageNumber)}
+            onChange={(event, page) => {
+                navigate(`/games/Games/${page}`);
+            }}
             sx={{
                 '& .MuiPaginationItem-root': {
                     color: '#0f172a', // text color
