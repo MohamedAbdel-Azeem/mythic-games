@@ -1,35 +1,53 @@
-import { useState,useEffect,useMemo } from "react";
+import { useState,useEffect } from "react";
 
 type GameProps = {
     QueryType: "Games" | "Trending" ;
     pageNumber: number;
 };
 
+type GamesListState = {
+  [pageNumber: string]: any;
+};
+
 export const useGamesList = (
     { QueryType , pageNumber }: GameProps = { QueryType: "Games" , pageNumber: 1}
 ) => {
-  // const url = useMemo(() => getAPIUrl(QueryType, pageNumber), [QueryType, pageNumber]);
     const url = getAPIUrl(QueryType, pageNumber);
-
-    const [gamesList, setGamesList] = useState(null);
+    const [gamesList, setGamesList] = useState<GamesListState>({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(url, { mode: "cors" })
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error("server error");
+        
+        if (gamesList[url]) {
+          console.log("Data already fetched");
+            setLoading(false);
+        } else {
+          console.log("Fetching data");
+            setLoading(true);
+            fetch(url, { mode: "cors" })
+            .then((response) => {
+                if (response.status >= 400) {
+                throw new Error("server error");
+                }
+                return response.json();
+            })
+            .then((response) => {
+                setGamesList((prevGamesList) => ({
+                ...prevGamesList,
+                [url]: response.results,
+                }));
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
         }
-        return response.json();
-      })
-      .then((response) => setGamesList(response.results))
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
-    },[url]);
+    }, [QueryType, pageNumber, gamesList]);
 
-    return { gamesList, loading, error };
-}
+    return { gamesList: gamesList[url], loading, error };
+};
 
 function getAPIUrl(QueryType: GameProps["QueryType"] , pageNumber : number) : string{
     if (QueryType === "Trending") {
