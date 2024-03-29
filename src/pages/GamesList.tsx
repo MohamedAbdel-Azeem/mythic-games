@@ -3,7 +3,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { useGamesList } from "../hooks/useGamesList";
 import { useParams } from "react-router-dom";
 import CustomPagination from "../components/CustomPagination";
-import { useEffect } from "react";
+import GameCard from "../components/GameCard";
 
 
 export default function GamesList() {
@@ -25,17 +25,14 @@ export default function GamesList() {
                 <div className="w-full h-full flex flex-wrap justify-center items-start gap-5 p-5">
                     {games?.map((game : any) => {
                         return (
-                            <div key={game.id} className="w-72 h-96 bg-gray-50 bg-opacity-25 backdrop-blur-sm rounded-md shadow-sm shadow-slate-600">
-                                <img
-                                    src={game.background_image}
-                                    alt={game.name}
-                                    className="w-full h-3/5 object-cover rounded-t-md"
-                                />
-                                <div className="p-2">
-                                    <h2 className="text-lg font-bold">{game.name}</h2>
-                                    <p className="text-sm">${game.price}</p>
-                                </div>
-                            </div>
+                            <GameCard
+                                key={game.id}
+                                title={game.name}
+                                price={game.price}
+                                imageUrl={game.background_image}
+                                hasDiscount={false}
+                                discountPercentage={0}
+                            />
                         );
                     })}
                 </div>
