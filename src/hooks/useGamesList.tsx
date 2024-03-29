@@ -33,6 +33,15 @@ export const useGamesList = (
                 const responseResultsWithPrices = response.results.map((game : any) => {
                     const randomPrice = Math.floor(Math.random() * (70 - 5 + 1) + 5);
                     game.price = randomPrice;
+                    const hasDiscount = Math.random() < 0.5; // 50% chance of having a discount
+                    if (hasDiscount) {
+                        const discount = Math.floor(Math.random() * (60 - 10 + 1) + 10);
+                        game.hasDiscount = true;
+                        game.discountPrice = discount;
+                    } else {
+                        game.hasDiscount = false;
+                        game.discountPrice = 0;
+                    }
                     return game;
                 });
                 setGamesList((prevGamesList) => ({

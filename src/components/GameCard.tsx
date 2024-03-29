@@ -13,11 +13,14 @@ export default function GameCard(
 ){
     return (
         <div className="w-64 h-80 flex flex-col gap-5 rounded-t-md">
-            <img src={imageUrl} alt={title} className="w-full h-3/5 object-cover rounded-t-md"/>
+            <img src={imageUrl} alt={title} className="w-full h-3/5 object-cover rounded-md"/>
             <div className="p-2 text-textColor">
                 <h2 className="text-lg font-bold">{title}</h2>
-                <p className="text-sm">${price}</p>
-                {hasDiscount && <p className="text-sm text-red-500">-{discountPercentage}%</p>}
+                <div className="flex flex-row gap-2 mt-2">
+                    {hasDiscount && <p className="text-xs bg-red-500 p-1 rounded-md text-center">-{discountPercentage}%</p>}
+                    <p className={`text-sm ${hasDiscount? 'line-through text-gray-500' : ''}`}>${price.toFixed(2)}</p>
+                    {hasDiscount && <p className="text-sm">${(price - price*discountPercentage!/100).toFixed(2)}</p>}
+                </div>
             </div>
         </div>
     );
