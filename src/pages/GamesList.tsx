@@ -20,7 +20,7 @@ export default function GamesList() {
     return (
         <div className="w-full h-full flex flex-col justify-start items-center bg-primary overflow-x-hidden">
             <Header isTransparent={false}/>
-            <main className="flex flex-col items-center px-10 pt-4">
+            <main className="flex flex-col items-center justify-center px-10 py-4">
                 <h1 className="text-3xl font-bold text-textColor">{queryType}</h1>
                 <div className="w-full h-full flex flex-wrap justify-center items-start gap-5 p-5">
                     {games?.map((game : any) => {
@@ -33,13 +33,13 @@ export default function GamesList() {
                                 />
                                 <div className="p-2">
                                     <h2 className="text-lg font-bold">{game.name}</h2>
-                                    <p className="text-sm">{game.released}</p>
+                                    <p className="text-sm">${game.price}</p>
                                 </div>
                             </div>
                         );
                     })}
-                    <CustomPagination />
                 </div>
+                <CustomPagination />
             </main>
         </div>
     );

@@ -30,9 +30,14 @@ export const useGamesList = (
                 return response.json();
             })
             .then((response) => {
+                const responseResultsWithPrices = response.results.map((game : any) => {
+                    const randomPrice = Math.floor(Math.random() * (70 - 5 + 1) + 5);
+                    game.price = randomPrice;
+                    return game;
+                });
                 setGamesList((prevGamesList) => ({
                 ...prevGamesList,
-                [url]: response.results,
+                [url]: responseResultsWithPrices,
                 }));
                 setLoading(false);
             })
