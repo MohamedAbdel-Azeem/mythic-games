@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 
 type GameProps = {
-    QueryType: "Games" | "Trending" ;
+    QueryType?: "Games" | "Trending" ;
     pageNumber: number;
 };
 

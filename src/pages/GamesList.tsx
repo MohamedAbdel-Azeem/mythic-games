@@ -7,9 +7,8 @@ import GameCard from "../components/GameCard";
 
 
 export default function GamesList() {
-    const { queryType = 'Games', pageNumber = '1' } = useParams<{ queryType: 'Games' | 'Trending'; pageNumber: string }>();
+    const { queryType , pageNumber = '1' } = useParams<{ queryType: 'Games' | 'Trending'; pageNumber: string }>();
     const { gamesList: games, loading: isLoading, error: isError } = useGamesList({ QueryType: queryType , pageNumber: parseInt(pageNumber) });
-
 
     if (isLoading) {
         return <LoadingSpinner />;
@@ -36,7 +35,7 @@ export default function GamesList() {
                         );
                     })}
                 </div>
-                <CustomPagination />
+                {queryType === 'Games' && <CustomPagination />}
             </main>
         </div>
     );
