@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useGamesList } from "../hooks/useGamesList";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CustomPagination from "../components/CustomPagination";
 import GameCard from "../components/GameCard";
 
@@ -22,16 +22,19 @@ export default function GamesList() {
             <main className="flex flex-col items-center justify-center px-10 py-4">
                 <h1 className="text-3xl font-bold text-textColor">{queryType}</h1>
                 <div className="w-full h-full flex flex-wrap justify-center items-start gap-8 p-5">
-                    {games?.map((game : any) => {
+                    {games?.map((game) => {
                         return (
-                            <GameCard
-                                key={game.id}
-                                title={game.name}
-                                price={game.price}
-                                imageUrl={game.background_image}
-                                hasDiscount={game.hasDiscount}
-                                discountPercentage={game.discountPrice}
-                            />
+                            <Link to={`/games/${queryType}/${pageNumber}/${game.id}`} state={game}>
+                                <GameCard
+                                    key={game.id}
+                                    title={game.name}
+                                    price={game.price}
+                                    imageUrl={game.background_image}
+                                    hasDiscount={game.hasDiscount}
+                                    discountPercentage={game.discountPrice}
+                                />
+                            </Link>
+
                         );
                     })}
                 </div>
