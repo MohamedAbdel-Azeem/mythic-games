@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-screen h-screen">
       <video
         autoPlay
         loop
@@ -17,9 +17,9 @@ export default function HomePage() {
       >
         <source src={backgroundVideo} type="video/mp4" />
       </video>
-      <div className="absolute top-0 left-0 w-full h-full bg-transparent flex flex-col gap-16">
+      <div className="absolute top-0 left-0 w-full h-screen bg-transparent flex flex-col gap-16">
         <Header />
-        <div className="w-full h-full flex md:flex-row flex-col items-center md:justify-between justify-evenly px-10 py-5">
+        <div className="w-full h-full flex md:flex-row flex-col items-center md:justify-between justify-evenly max-sm:gap-2 px-10 py-5">
           <div className="flex flex-col gap-5">
             <div className="p-5 text-center flex flex-col text-slate-950 gap-4 bg-gray-50 bg-opacity-25 backdrop-blur-sm rounded-md shadow-sm shadow-slate-600">
               <h2 className="text-4xl font-bold font-serif">Mythic Games</h2>
