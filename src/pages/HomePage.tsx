@@ -56,10 +56,6 @@ export default function HomePage() {
             </div>
           </div>
           <div className="p-6 flex flex-col justify-center items-center  text-slate-950 gap-4 bg-gray-50 bg-opacity-25 backdrop-blur-sm rounded-md shadow-sm shadow-slate-600">
-            <div className="w-36 py-1 bg-slate-100 rounded-xl flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
-              <Icon path={mdiDice5} size={1} />
-              Roll a Dice
-            </div>
             <Link to="/games/Games/1">
               <div className="w-36 py-1 bg-slate-100 rounded-lg flex justify-center items-start gap-1 hover:bg-linkHover hover:scale-110 transition-transform duration-300">
                 <Icon path={mdiViewList} size={1} />
