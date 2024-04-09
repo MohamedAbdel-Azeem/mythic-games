@@ -5,8 +5,13 @@ import ImageSlider from "../components/ImageSlider";
 import Chip from "@mui/material/Chip";
 import Icon from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
+import { useDispatch } from "react-redux";
+import {addToCart} from "../redux/cartSlice.js"
 
 export default function GamePage(){
+
+    let dispatch = useDispatch();
+
     const location = useLocation();
     const game = location.state;
     return (
@@ -21,14 +26,14 @@ export default function GamePage(){
                         <ImageSlider images={game['short_screenshots']}/>
                     </div>
                 </div>
-                <div className="mt-10 mb-0">
+                <div className="mt-10 mb-3 flex flex-wrap justify-center items-center">
                     {
                         game.genres.map((genre: any) => {
                             return <Chip label={genre.name} className="m-1 text-textColor" size="medium" color="secondary" variant="filled" key={genre.id}/>;
                         })
                     }
                 </div>
-                <button className="bg-emerald-600 hover:bg-emerald-700 text-textColor p-2 rounded-md flex items-center justify-center">
+                <button className="bg-emerald-600 hover:bg-emerald-700 text-textColor p-2 rounded-md flex items-center justify-center" onClick={()=> dispatch(addToCart(game))}>
                     <Icon path={mdiPlus} size={1}/>
                     Add to Cart
                 </button>
