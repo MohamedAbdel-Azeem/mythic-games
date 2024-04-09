@@ -4,16 +4,20 @@ import GameRating from "../components/GameRating";
 import ImageSlider from "../components/ImageSlider";
 import Chip from "@mui/material/Chip";
 import Icon from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
-import { useDispatch } from "react-redux";
-import {addToCart} from "../redux/cartSlice.js"
+import { mdiPlus,mdiDelete } from '@mdi/js';
+import { useDispatch,useSelector } from "react-redux";
+import {addToCart,removeFromCart} from "../redux/cartSlice.js"
 
 export default function GamePage(){
 
     let dispatch = useDispatch();
+    let cartSlice = useSelector((state) => state.cart);
 
     const location = useLocation();
     const game = location.state;
+
+    const isAdded = cartSlice.cart.some((g) => g.id === game.id);
+    
     return (
         <div className="flex flex-col bg-primary h-screen text-textColor overflow-x-hidden">
             <Header isTransparent={false}/>
@@ -33,11 +37,23 @@ export default function GamePage(){
                         })
                     }
                 </div>
-                <button className="bg-emerald-600 hover:bg-emerald-700 text-textColor p-2 rounded-md flex items-center justify-center" onClick={()=> dispatch(addToCart(game))}>
-                    <Icon path={mdiPlus} size={1}/>
-                    Add to Cart
-                </button>
+                {
+                    ! isAdded && 
+                    <button className="bg-emerald-600 hover:bg-emerald-700 text-textColor p-2 rounded-md flex items-center justify-center" onClick={()=> dispatch(addToCart(game))}>
+                        <Icon path={mdiPlus} size={1}/>
+                        Add to Cart
+                    </button>
+                }
+                {
+                    isAdded && 
+                    <button className="bg-red-600 hover:bg-red-700 text-textColor p-2 rounded-md flex items-center justify-center" onClick={()=> dispatch(removeFromCart(game))}>
+                        <Icon path={mdiDelete} size={1}/>
+                        Remove from Cart
+                    </button>
+                }
+                
             </div>
         </div>
     );
 }
+

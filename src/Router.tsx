@@ -1,15 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GamesList from "./pages/GamesList";
 import HomePage from "./pages/HomePage";
+import NotFoundErrorPage from "./pages/NotFounfErrorPage";
 import ErrorPage from "./pages/ErrorPage";
 import GamePage from "./pages/GamePage";
+import React from "react";
 
 const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <HomePage />,
-      errorElement: <ErrorPage />,
+      errorElement: <NotFoundErrorPage />,
     },
     {
       path: "/games/:queryType/:pageNumber",
@@ -22,6 +24,7 @@ const Router = () => {
     {
       path: "/games/:queryType/:pageNumber/:id",
       element: <GamePage />,
+      errorElement: <ErrorPage />,
     }
   ]);
 
