@@ -5,11 +5,13 @@ import './index.css';
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import cartReducer from "./redux/cartSlice";
+import gamesReducer from "./redux/gamesSlice";
 
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
+    games: gamesReducer,
   },
 });
 

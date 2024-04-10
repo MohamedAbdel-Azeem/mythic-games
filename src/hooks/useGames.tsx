@@ -1,24 +1,25 @@
 import { useState,useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import {setGamesList} from "../redux/gamesSlice.js";
+import getAPIUrl from "../utils/get-api-url.js";
 
 type GameProps = {
-    QueryType?: "Games" | "Trending" ;
+    QueryType: "Games" | "Trending" ;
     pageNumber: number;
 };
 
-type GamesListState = {
-  [pageNumber: string]: any;
-};
 
-export const useGamesList = (
+export const useGames = (
     { QueryType , pageNumber }: GameProps = { QueryType: "Games" , pageNumber: 1}
 ) => {
     const url = getAPIUrl(QueryType, pageNumber);
-    const [gamesList, setGamesList] = useState<GamesListState>({});
+    const gamesList = useSelector((state) => state.games);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (gamesList[url]) {
+        if (gamesList.games[QueryType + pageNumber]) {
             setLoading(false);
         } else {
             setLoading(true);
@@ -35,34 +36,32 @@ export const useGamesList = (
                     game.price = randomPrice;
                     const hasDiscount = Math.random() < 0.5; // 50% chance of having a discount
                     if (hasDiscount) {
-                        const discount = Math.floor(Math.random() * (60 - 10 + 1) + 10);
+                        const discount = Math.floor(Math.random() * (60 - 10 + 1) + 10); // Number between 10 and 60
                         game.hasDiscount = true;
                         game.discountPrice = discount;
+                        game.finalPrice = game.price - game.price * (discount / 100);
                     } else {
                         game.hasDiscount = false;
                         game.discountPrice = 0;
+                        game.finalPrice = game.price;
                     }
                     return game;
                 });
-                setGamesList((prevGamesList) => ({
-                ...prevGamesList,
-                [url]: responseResultsWithPrices,
-                }));
+                dispatch(
+                    setGamesList({
+                        queryInfo: QueryType + pageNumber,
+                        data: responseResultsWithPrices
+                    })
+                );
                 setLoading(false);
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 setError(error);
                 setLoading(false);
             });
         }
-    }, [QueryType, pageNumber, gamesList]);
-
-    return { gamesList: gamesList[url], loading, error };
-};
-
-function getAPIUrl(QueryType: GameProps["QueryType"] , pageNumber : number) : string{
-    if (QueryType === "Trending") {
-        return "https://api.rawg.io/api/games?key=ca19ff26425d42c2b47b413aa4a2de2a&ordering=-added&dates=2022-01-01,2023-12-31";
-    }
-    return `https://api.rawg.io/api/games?key=ca19ff26425d42c2b47b413aa4a2de2a&page=${pageNumber}`;
+    }, [url,dispatch]);
+    return { loading, error };
 }
+
+
+

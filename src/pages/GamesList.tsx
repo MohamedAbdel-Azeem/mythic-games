@@ -1,15 +1,16 @@
 import Header from "../components/Header";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { useGamesList } from "../hooks/useGamesList";
+import { useGames } from "../hooks/useGames";
 import { Link, useParams } from "react-router-dom";
 import CustomPagination from "../components/CustomPagination";
 import GameCard from "../components/GameCard";
+import { useSelector } from "react-redux";
 
 
 export default function GamesList() {
     const { queryType , pageNumber = '1' } = useParams<{ queryType: 'Games' | 'Trending'; pageNumber: string }>();
-    const { gamesList: games, loading: isLoading, error: isError } = useGamesList({ QueryType: queryType , pageNumber: parseInt(pageNumber) });
-
+    const { loading: isLoading, error: isError } = useGames({ QueryType: queryType , pageNumber: parseInt(pageNumber) });
+    const games = useSelector((state) => state.games.games[queryType + pageNumber]);
     if (isLoading) {
         return <LoadingSpinner />;
     }
