@@ -12,7 +12,7 @@ export default function CartDrawerElements() {
                             <img src={game.background_image} alt={game.name} className="w-20 h-20"/>
                             <div className="flex flex-col gap-2">
                                 <h2 className="text-lg font-bold">{game.name}</h2>
-                                <h3 className="text-sm">{game.price} $</h3>
+                                <h3 className="text-sm">{game.finalPrice} $</h3>
                             </div>
                         </div>
                     );
