@@ -4,7 +4,7 @@ import GameRating from "../components/GameRating";
 import ImageSlider from "../components/ImageSlider";
 import Chip from "@mui/material/Chip";
 import Icon from '@mdi/react';
-import { mdiPlus,mdiDelete } from '@mdi/js';
+import { mdiPlus,mdiDelete, mdiArrowLeft } from '@mdi/js';
 import { useDispatch,useSelector } from "react-redux";
 import {addToCart,removeFromCart} from "../redux/cartSlice.js"
 
@@ -22,6 +22,9 @@ export default function GamePage(){
         <div className="flex flex-col bg-primary h-screen text-textColor overflow-x-hidden">
             <Header isTransparent={false}/>
             <div className="flex flex-col py-10 justify-center items-center gap-4">
+                <div className="w-full flex justify-start items-center px-10">
+                    <Icon path={mdiArrowLeft} size={1} className="hover:text-linkHover transition-colors duration-300 cursor-pointer" onClick={()=> window.history.back()}/>
+                </div>
                 <h1 className="text-4xl font-bold">{game.name}</h1>
                 <GameRating value={game.rating}/>
                 <div className="px-16 flex flex-col items-center">
