@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage";
 import NotFoundErrorPage from "./pages/NotFounfErrorPage";
 import ErrorPage from "./pages/ErrorPage";
 import GamePage from "./pages/GamePage";
-import React from "react";
 
 const Router = () => {
   const router = createBrowserRouter([
