@@ -1,32 +1,35 @@
-# React + TypeScript + Vite
+# Mythic Games
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mythic Games is a web application developed as part of [The Odin Project](https://www.theodinproject.com/). It's a platform where users can browse and add video games to their cart. The application fetches data from the [RAWG Video Game Database API](https://api.rawg.io/docs/).
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://reactjs.org/): A JavaScript library for building user interfaces.
+- [Redux](https://redux.js.org/): A Predictable State Container for JS Apps.
+- [React Router](https://reactrouter.com/): Declarative routing for React.
+- [TypeScript](https://www.typescriptlang.org/): An open-source language which builds on JavaScript by adding static type definitions.
+- [Vite](https://vitejs.dev/): A build tool that aims to provide a faster and leaner development experience for modern web projects.
+- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
+- [Material-UI](https://mui.com/): A popular React UI framework.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Browse video games: Users can browse video games fetched from the RAWG API.
+- Game details: Users can view detailed information about a game by clicking on it.
+- Add to cart: Users can add games to their cart.
+- Pagination: Users can navigate through different pages of games.
 
-- Configure the top-level `parserOptions` property like this:
+## Learning Outcomes
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+This project helped me to understand and implement various concepts like:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Fetching data from an API and handling API responses using custom hooks.
+- Managing application state using Redux.
+- Routing in React applications using React Router.
+- Styling components using Tailwind CSS and Material-UI.
+- Writing modular and reusable React components.
 
-- API Documentation: https://api.rawg.io/docs/
+## Running the Project
+
+To run this project locally, clone the repository and install the dependencies using `npm install`. Then, start the development server using `npm run dev`.
+
