@@ -32,18 +32,18 @@ export const useGames = (
             })
             .then((response) => {
                 const responseResultsWithPrices = response.results.map((game : any) => {
-                    const randomPrice = Math.floor(Math.random() * (70 - 5 + 1) + 5);
+                    const randomPrice = Number((Math.random() * (70 - 5 + 1) + 5).toFixed(2));
                     game.price = randomPrice;
                     const hasDiscount = Math.random() < 0.5; // 50% chance of having a discount
                     if (hasDiscount) {
-                        const discount = Math.floor(Math.random() * (60 - 10 + 1) + 10); // Number between 10 and 60
+                        const discount = Number(Math.floor(Math.random() * (60 - 10 + 1) + 10).toFixed(2)); // Number between 10 and 60
                         game.hasDiscount = true;
                         game.discountPrice = discount;
-                        game.finalPrice = game.price - game.price * (discount / 100);
+                        game.finalPrice = Number((game.price - game.price * (discount / 100)).toFixed(2));
                     } else {
                         game.hasDiscount = false;
                         game.discountPrice = 0;
-                        game.finalPrice = game.price;
+                        game.finalPrice = Number((game.price).toFixed(2));
                     }
                     return game;
                 });
